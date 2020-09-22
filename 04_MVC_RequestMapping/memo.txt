@@ -1,0 +1,6 @@
+WED-INF 밑에 있는 jsp는 바로 실핼할수 없다.
+WED-INF 밑에 있는 jsp는 컨트롤러에 의해서만 실행할 수 있다.
+* 실행을 위해서는 주소창에  http://localhost:8080/ex/a 이런식으로 실행한다.
+
+Dynamic WebProject에서 바로 실행하고 싶은 jsp가 있으면  webContent에 만든다.
+Spring에서 바로 실행하고 싶은 jsp가 있으면 webapp에 만든다.
