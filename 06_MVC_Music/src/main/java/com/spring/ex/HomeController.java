@@ -3,7 +3,6 @@ package com.spring.ex;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
-import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,33 +37,47 @@ public class HomeController {
 		
 		return "home";
 	}
+	
 	@RequestMapping("form")
-	public String form(){
-		System.out.println("form()");
+	public String form() {
 		return "form";
 	}
+	
 	@RequestMapping("input1")
-	public String input1(){
-		System.out.println("input1()");
+	public String input1() {
 		return "music/result1";
 	}
 	@RequestMapping("input2")
-	public String input2(Model model,@RequestParam("title") String title,@RequestParam("singer") String singer, @RequestParam("price") String price){
-		System.out.println("input2()");
-		System.out.println(title);
-		System.out.println(singer);
-		System.out.println(price);
+	public String input2(@RequestParam("title") String title,
+						@RequestParam("singer") String singer,
+						@RequestParam("price") String price) {
+		
+		System.out.println("title:"+title);
+		System.out.println("singer:"+singer);
+		System.out.println("price:"+price);
+		
 		return "music/result2";
 	}
+	
+	
 	@RequestMapping("input3")
-	public String result3(Music m){
-		System.out.println("input3()");
+	public String input3(MusicBean mBean) {
+		
+		System.out.println(mBean.getTitle());
+		System.out.println(mBean.getSinger());
+		System.out.println(mBean.getPrice());
+		
 		return "music/result3";
 	}
+	
 	@RequestMapping("input4")
-	public String result4(@ModelAttribute("mb") Music m){
-		System.out.println("input4()");
+	public String input4(@ModelAttribute("mb") MusicBean mBean) {
+		
+		System.out.println(mBean.getTitle());
+		System.out.println(mBean.getSinger());
+		System.out.println(mBean.getPrice());
+		
 		return "music/result4";
 	}
-	
+			
 }

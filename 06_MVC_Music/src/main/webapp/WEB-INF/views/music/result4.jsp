@@ -1,6 +1,14 @@
+<%@page import="com.spring.ex.MusicBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-result4<hr>
-제목: ${mb.title }<br>
-가수명: ${mb.singer}<br>
-가격: ${mb.price}<br>
+
+WEB-INF\views\music\result4.jsp<br>
+
+title : ${musicBean.title }<br>
+signer : ${musicBean.getSinger() }<br>
+<%-- price : <%=((MusicBean)request.getAttribute("musicBean")).getPrice() %><br> --%>
+
+
+title : ${mb.title }<br>
+signer : ${mb.getSinger() }<br>
+price : <%=((MusicBean)request.getAttribute("mb")).getPrice() %><br>
