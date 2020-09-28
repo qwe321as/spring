@@ -5,13 +5,13 @@
 
 <!-- WebContet => webapp -->      
 <script type="text/javascript">
-	function goUpdate(num){
-		location.href="update.ab?num="+num; 
+	function goUpdate(num,pageNumber,pageSize){
+		location.href="update.ab?num="+num+"&pageNumber="+pageNumber+"&pageSize="+pageSize; 
 	}
 </script>    
 album\AlbumList.jsp<br>
 
-<h2>앨범 리스트 화면</h2>
+<h2>앨범 리스트 화면(레코드 갯수: ${totalCount })</h2>
 <!-- 
 whatColumn=title
 keyword=날 
@@ -44,12 +44,13 @@ keyword=날
 			<td>${album.singer }</td>
 			<td>${album.price }</td>
 			<td>${album.day }</td>
-			<td><a href="delete.ab?num=${album.num }">삭제</a></td>
-			<td><input type="button" value="수정" onClick="goUpdate('${album.num }')"/></td>
+			<td><a href="delete.ab?num=${album.num }&pageNumber=${pageInfo.pageNumber }&pageSize=${pageInfo.pageSize }">삭제</a></td>
+			<td><input type="button" value="수정" onClick="goUpdate('${album.num }','${pageInfo.pageNumber }','${pageInfo.pageSize }')"/></td>
 		</tr>
 	</c:forEach>
 </table>
 <br>
+${pageInfo.pagingHtml }<br>
 <a href="insert.ab">삽입</a>
 
 

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import album.model.AlbumDao;
 
@@ -15,13 +16,17 @@ public class AlbumDeleteController {
 	
 	@Autowired
 	private AlbumDao albumDao;
-	
+	ModelAndView mav = new ModelAndView();
+
 	@RequestMapping(command)
-	public String doAction(@RequestParam("num") int num) {
+	public ModelAndView doAction(@RequestParam("num") int num,
+			@RequestParam("pageNumber") int pageNumber,
+			@RequestParam("pageSize") int pageSize
+			) {
 		
 		albumDao.deleteAlbum(num);
-		
-		return gotoPage;
+		mav.setViewName(gotoPage+"?pageNumber="+pageNumber+"&pageSize="+pageSize);
+		return mav;
 		
 	}
 }

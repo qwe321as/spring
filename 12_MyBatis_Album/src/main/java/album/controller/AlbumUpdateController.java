@@ -20,36 +20,47 @@ public class AlbumUpdateController {
 	final String command = "update.ab";
 	final String getPage = "AlbumUpdateForm"; 
 	final String gotoPage = "redirect:/list.ab"; 
-	
-	
+
+
 	@Autowired
 	private AlbumDao albumDao;
-	
+
 	// AlbumList.jsp에서 수정 클릭
 	@RequestMapping(value = command, method=RequestMethod.GET)
-	public String doAction(@RequestParam("num") int num, Model model) {
-		
+	public String doAction(@RequestParam("num") int num, Model model,
+			@RequestParam("pageNumber") int pageNumber,
+			@RequestParam("pageSize") int pageSize
+
+			) {
+
 		AlbumBean album = albumDao.getOneAlbum(num);
 		model.addAttribute("album", album);
+		model.addAttribute("pageNumber", pageNumber);
+		model.addAttribute("pageSize", pageSize);
 		return getPage; 
 	}
-	
+
 	// AlbumForm.jsp에서 submit 클릭
 	@RequestMapping(value = command, method=RequestMethod.POST)
 	public ModelAndView doAction(@ModelAttribute("album") @Valid AlbumBean album,
-							BindingResult result) {
-		
+			@RequestParam("pageNumber") int pageNumber,
+			@RequestParam("pageSize") int pageSize,
+			BindingResult result) {
+
 		ModelAndView mav = new ModelAndView();
-		
+
 		System.out.println(result.hasErrors());
 		if(result.hasErrors()) {
+			mav.addObject("pageNumber",pageNumber);
+			mav.addObject("pageSize",pageSize);
 			mav.setViewName(getPage);
 			return mav;
 		}
-		
+
 		int cnt = albumDao.updateAlbum(album);
 		if(cnt>0) {
-			mav.setViewName(gotoPage);
+			mav.setViewName(gotoPage+"?pageNumber="+pageNumber+"&pageSize="+pageSize);
+			/* "redirect:/list.ab?pageNumber="+pageNumber+"pageSize="+pageSize */
 		}else {
 			mav.setViewName(getPage);
 		}

@@ -32,6 +32,7 @@ public class AlbumDao {
 		List<AlbumBean> lists = new ArrayList<AlbumBean>(); 
 		
 		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
+		//넘길 페이지의 갯수 (나오는 페이지의 수
 		//new RowBounds(0,2);
 		
 		lists = sqlSessionTemplate.selectList("album.AlbumBean.GetAlbumList",map,rowBounds);
@@ -57,8 +58,8 @@ public class AlbumDao {
 		return cnt;
 	}
 	
-	public int getTotalCount() {
-		int cnt = sqlSessionTemplate.selectOne("album.AlbumBean.GetTotalCount");
+	public int getTotalCount(Map<String, String> map) {
+		int cnt = sqlSessionTemplate.selectOne("album.AlbumBean.GetTotalCount",map);
 		return cnt;
 	}
 } 

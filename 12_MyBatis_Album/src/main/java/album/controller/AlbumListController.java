@@ -43,14 +43,14 @@ public class AlbumListController {
 		map.put("whatColumn",whatColumn); //whatColumn=title
 		map.put("keyword", "%"+keyword+"%"); //keyword=%³¯%
 		
-		int totalCount = albumDao.getTotalCount();
+		int totalCount = albumDao.getTotalCount(map);
 		System.out.println("totalCount : " + totalCount); 
 		
 		String url = request.getContextPath() +"/" +command ;
 		System.out.println("url : " + url);// /ex/list.ab
 		  
-		Paging pageInfo = new Paging(pageNumber,pageSize,totalCount,url,whatColumn,keyword);
-		
+			
+			Paging pageInfo = new Paging(pageNumber,pageSize,totalCount,url,whatColumn,keyword);
 		System.out.println("offset : " + pageInfo.getOffset()); // 0
 		System.out.println("limit : " + pageInfo.getLimit()); // 2
 		
@@ -59,6 +59,8 @@ public class AlbumListController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("lists", lists);
 		mav.setViewName(getPage);
+		mav.addObject("pageInfo",pageInfo);
+		mav.addObject("totalCount", totalCount);
 		return mav;
 		
 	}

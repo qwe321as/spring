@@ -11,10 +11,12 @@
 
 WEB-INF\album\AlbumUpdateForm.jsp <br>
 
-<h1>앨범 수정</h1>
+<h1>앨범 수정(${pageNumber }/${pageSize })</h1>
 <form:form commandName="album" action="update.ab" method="post">
 
 	<input type="hidden" name="num" value="${album.num }">
+	<input type="hidden" name="pageNumber" value="${pageNumber }">
+	<input type="hidden" name="pageSize" value="${pageSize }">
 	<p>
 		<label>노래제목</label>
 		<input type="text" name="title" value="${album.title }">

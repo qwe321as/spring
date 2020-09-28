@@ -207,7 +207,8 @@ public class Paging {
 			this.pageNumber = this.totalPage ;
 		}
 		
-		this.offset = ( pageNumber - 1 ) * pageSize ; 
+		this.offset = ( pageNumber - 1 ) * pageSize ;  //건너뛰어야하는 레코드 갯수
+		
 		if( this.endRow > this.totalCount ){
 			this.endRow = this.totalCount  ;
 		}
